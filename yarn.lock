@@ -339,10 +339,10 @@
   resolved "https://registry.yarnpkg.com/@giancosta86/sync-tools/-/sync-tools-1.0.0.tgz#8b0a080c7a119521ef6dd45950193d1f70ca40cc"
   integrity sha512-p3vk87D6fJngT9RnEdBVbCrG4riLER7CMmEZ00JIBriWb4WF5vLp1mVjVv+1lWLm7LHF4CnC8AmNZQw51OJQbg==
 
-"@giancosta86/time-utils@^4.1.1":
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/@giancosta86/time-utils/-/time-utils-4.1.1.tgz#82631ed57f19328c5873782f563ec3da7fe97934"
-  integrity sha512-qbOs0rwj4+dkPjeomzwX7UYtrNy2DplxYJF0rJgNu+k1YNC2gARy9og9bnxfbXlXucJuxN/qZXggFTfrMLzmcA==
+"@giancosta86/time-utils@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@giancosta86/time-utils/-/time-utils-5.0.0.tgz#9467ae734b8bc57faf1ef8b1f0f90ca832622fe3"
+  integrity sha512-2FtvXFshiUuX/N+1K3iRvXV46GxtKbFYF5WISYrdWgqHMgycBa1sN8m1wUtUlzzmNenYGvcSSHF180QOSggnSQ==
 
 "@humanwhocodes/config-array@^0.11.10":
   version "0.11.10"

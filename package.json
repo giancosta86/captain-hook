@@ -39,7 +39,7 @@
   "dependencies": {},
   "devDependencies": {
     "@giancosta86/sync-tools": "^1.0.0",
-    "@giancosta86/time-utils": "^4.1.1",
+    "@giancosta86/time-utils": "^5.0.0",
     "@swc/core": "^1.3.76",
     "@swc/jest": "^0.2.29",
     "@types/jest": "^29.5.3",
