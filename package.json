@@ -20,6 +20,10 @@
     "./dist/*"
   ],
   "exports": {
+    "./defineContext": {
+      "types": "./dist/defineContext/index.d.ts",
+      "default": "./dist/defineContext/index.js"
+    },
     "./useAsyncFetcher": {
       "types": "./dist/useAsyncFetcher/index.d.ts",
       "default": "./dist/useAsyncFetcher/index.js"

@@ -15,10 +15,73 @@ The package on NPM is:
 > @giancosta86/captain-hook
 
 The public API is partitioned into the following modules:
-The public API entirely resides in the root package index, so you shouldn't reference specific modules.
+
+- **defineContext**: for the `defineContext` multi-factory function.
+
 - **useAsyncFetcher**: for the `useAsyncFetcher` hook.
 
 ## Usage
+
+### defineContext()
+
+Factory function removing boilerplate code from the creation of a _React context_; you simply need to know:
+
+- the _interface_ of the context
+
+- the _hook_ function for obtaining the (probably memoized via `useMemo()`) _context value_ that will be passed to the `Provider` component upon each rendering
+
+and it will return (in this order):
+
+- the _hook_ internally calling `useContext()` to obtain the current _context value_ within the `Provider` component tree
+
+- the `Provider` component itself, ready to use - and with no additional properties
+
+For example:
+
+```typescript
+// Defining the context interface.
+interface CounterContext {
+  numericValue: number;
+  increase(): void;
+}
+
+// This creates both the context-access hook
+// and the context provider component.
+const [useCounterContext, CounterContextProvider] =
+  defineContext<CounterContext>(
+    // This is actually a hook, so it must
+    // obey all the hook rules.
+    //
+    // Its result must be the context value passed
+    // by the context provider to its component tree.
+    () => {
+      const [numericValue, setNumericValue] = useState(0);
+
+      const contextValue = useMemo(
+        () => ({
+          numericValue,
+          increase() {
+            setNumericValue(current => current + 1);
+          }
+        }),
+        [numericValue]
+    );
+
+    return contextValue;
+  });
+
+const ContextClient: FC = () => {
+  const { numericValue, increase } = useCounterContext();
+
+  // Use the context data here, and return the JSX...
+};
+
+// Somewhere in the React component tree...
+<CounterContextProvider>
+  <ContextClient />
+</CounterContextProvider>
+
+```
 
 ### useAsyncFetcher()
 
