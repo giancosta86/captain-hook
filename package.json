@@ -22,19 +22,19 @@
   "repository": "giancosta86/captain-hook",
   "scripts": {
     "clean": "rimraf dist coverage giancosta86-*.tgz",
-    "clean:all": "yarn clean && rimraf node_modules",
+    "clean:all": "pnpm clean && rimraf node_modules",
     "format": "prettier --write .",
-    "prepack": "yarn check-all && yarn build && yarn prune-dist",
-    "check-all": "yarn check-format && yarn lint && yarn test",
+    "prepack": "pnpm check-all && pnpm build && pnpm prune-dist",
+    "check-all": "pnpm check-format && pnpm lint && pnpm test",
     "check-format": "prettier --check .",
     "lint": "eslint . --ext .js,.ts,.jsx,.tsx,.cjs,.mjs",
     "test": "jest --detectOpenHandles",
-    "test:watch": "yarn test --watch",
-    "test:coverage": "yarn test --coverage",
-    "build": "yarn compile-ts",
+    "test:watch": "pnpm test --watch",
+    "test:coverage": "pnpm test --coverage",
+    "build": "pnpm compile-ts",
     "compile-ts": "tsc",
     "prune-dist": "rimraf -g 'dist/test/' 'dist/**/*.test.*'",
-    "watch": "yarn compile-ts --watch"
+    "watch": "pnpm compile-ts --watch"
   },
   "dependencies": {},
   "devDependencies": {

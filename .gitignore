@@ -4,7 +4,4 @@
 
 /giancosta86-*.tgz
 
-/yarn-debug.log*
-/yarn-error.log*
-
 /*.tsbuildinfo
