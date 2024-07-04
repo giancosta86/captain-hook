@@ -14,7 +14,9 @@ The package on NPM is:
 
 > @giancosta86/captain-hook
 
+The public API is partitioned into the following modules:
 The public API entirely resides in the root package index, so you shouldn't reference specific modules.
+- **useAsyncFetcher**: for the `useAsyncFetcher` hook.
 
 ## Usage
 

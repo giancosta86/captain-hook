@@ -1,5 +1,5 @@
 import React from "react";
-import { create, act } from "react-test-renderer";
+import { render } from "@testing-library/react";
 import { delay, measureDuration } from "@giancosta86/time-utils";
 import { createBarrier } from "@giancosta86/sync-tools";
 import { UseAsyncFetcherTestBox } from "./useAsyncFetcher.test.box";
@@ -40,7 +40,7 @@ describe("useAsyncFetcher()", () => {
     it("should work", async () => {
       const fetchedValue = await new Promise<string | undefined>(
         (resolve, reject) => {
-          create(
+          render(
             <UseAsyncFetcherTestBox
               fetcher={FastFetcher.run}
               onData={resolve}
@@ -59,7 +59,7 @@ describe("useAsyncFetcher()", () => {
     describe("when the fetcher throws", () => {
       it("should call onError()", async () => {
         const error = await new Promise<unknown>((resolve, reject) => {
-          create(
+          render(
             <UseAsyncFetcherTestBox
               fetcher={ThrowingFetcher.run}
               onData={reject}
@@ -80,7 +80,7 @@ describe("useAsyncFetcher()", () => {
         const dataProcessingErrorMessage = "Data processing error";
 
         const error = await new Promise<unknown>((resolve, reject) => {
-          create(
+          render(
             <UseAsyncFetcherTestBox
               fetcher={FastFetcher.run}
               onData={() => {
@@ -105,7 +105,7 @@ describe("useAsyncFetcher()", () => {
         const elapsedTime = await measureDuration(async () => {
           const fetchedValue = await new Promise<string | undefined>(
             (resolve, reject) => {
-              create(
+              render(
                 <UseAsyncFetcherTestBox
                   fetcher={SlowFetcher.run}
                   onData={resolve}
@@ -130,7 +130,7 @@ describe("useAsyncFetcher()", () => {
         const dependencies = [92, 98, "Yogi"] as const;
 
         return new Promise<void>((resolve, reject) => {
-          const renderer = create(
+          const { rerender } = render(
             <UseAsyncFetcherTestBox
               fetcher={() =>
                 SlowFetcher.run(
@@ -145,18 +145,16 @@ describe("useAsyncFetcher()", () => {
             />
           );
 
-          act(() => {
-            renderer.update(
-              <UseAsyncFetcherTestBox
-                fetcher={SlowFetcher.run}
-                onData={reject}
-                onError={reject}
-                onCancel={reject}
-                onStale={reject}
-                dependencies={dependencies}
-              />
-            );
-          });
+          rerender(
+            <UseAsyncFetcherTestBox
+              fetcher={SlowFetcher.run}
+              onData={reject}
+              onError={reject}
+              onCancel={reject}
+              onStale={reject}
+              dependencies={dependencies}
+            />
+          );
         });
       });
     });
@@ -165,7 +163,7 @@ describe("useAsyncFetcher()", () => {
       describe("when the stale processor runs fine", () => {
         it("should complete just the latest pipeline", () =>
           createBarrier(2, (addToken, reject) => {
-            const renderer = create(
+            const { rerender } = render(
               <UseAsyncFetcherTestBox
                 fetcher={() =>
                   SlowFetcher.run(
@@ -180,25 +178,23 @@ describe("useAsyncFetcher()", () => {
               />
             );
 
-            act(() => {
-              renderer.update(
-                <UseAsyncFetcherTestBox
-                  fetcher={SlowFetcher.run}
-                  onData={addToken}
-                  onError={reject}
-                  onCancel={reject}
-                  onStale={reject}
-                  dependencies={[1]}
-                />
-              );
-            });
+            rerender(
+              <UseAsyncFetcherTestBox
+                fetcher={SlowFetcher.run}
+                onData={addToken}
+                onError={reject}
+                onCancel={reject}
+                onStale={reject}
+                dependencies={[1]}
+              />
+            );
           }));
       });
 
       describe("when the stale processor throws an error", () => {
         it("should call the related onError()", () =>
           createBarrier(2, (addToken, reject) => {
-            const renderer = create(
+            const { rerender } = render(
               <UseAsyncFetcherTestBox
                 fetcher={() =>
                   SlowFetcher.run(
@@ -215,18 +211,16 @@ describe("useAsyncFetcher()", () => {
               />
             );
 
-            act(() => {
-              renderer.update(
-                <UseAsyncFetcherTestBox
-                  fetcher={SlowFetcher.run}
-                  onData={addToken}
-                  onError={reject}
-                  onCancel={reject}
-                  onStale={reject}
-                  dependencies={[1]}
-                />
-              );
-            });
+            rerender(
+              <UseAsyncFetcherTestBox
+                fetcher={SlowFetcher.run}
+                onData={addToken}
+                onError={reject}
+                onCancel={reject}
+                onStale={reject}
+                dependencies={[1]}
+              />
+            );
           }));
       });
     });
@@ -235,7 +229,7 @@ describe("useAsyncFetcher()", () => {
   describe("when passing a fetcher returning undefined", () => {
     it("should cancel the pipeline and call onCancel()", () =>
       new Promise<void>((resolve, reject) => {
-        create(
+        render(
           <UseAsyncFetcherTestBox
             fetcher={CancelingErrorFetcher.run}
             onData={reject}
@@ -252,7 +246,7 @@ describe("useAsyncFetcher()", () => {
         const cancelErrorMessage = "Cancel error";
 
         const error = await new Promise<unknown>((resolve, reject) => {
-          create(
+          render(
             <UseAsyncFetcherTestBox
               fetcher={CancelingErrorFetcher.run}
               onData={reject}
