@@ -14,7 +14,7 @@ namespace FastFetcher {
 }
 
 namespace SlowFetcher {
-  export const fetchDelay = 1000;
+  export const fetchDelay = 500;
 
   export const delayTestInterval = fetchDelay - fetchDelay / 6;
 
