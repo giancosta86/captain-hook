@@ -1,6 +1,7 @@
 {
   "name": "@giancosta86/captain-hook",
   "version": "3.0.0",
+  "type": "module",
   "description": "TypeScript hooks for React",
   "keywords": [
     "React",

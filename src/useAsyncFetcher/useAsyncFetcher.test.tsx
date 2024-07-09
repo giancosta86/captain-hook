@@ -3,7 +3,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { delay, measureDuration } from "@giancosta86/time-utils";
 import { createBarrier } from "@giancosta86/sync-tools";
-import { UseAsyncFetcherTestBox } from "./useAsyncFetcher.test.box";
+import { UseAsyncFetcherTestBox } from "./useAsyncFetcher.test.box.js";
 
 namespace Fetchers {
   export const value = "Dodo";

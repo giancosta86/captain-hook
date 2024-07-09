@@ -1,5 +1,5 @@
 import React from "react";
-import { UseAsyncFetcherParams, useAsyncFetcher } from "./useAsyncFetcher";
+import { UseAsyncFetcherParams, useAsyncFetcher } from "./useAsyncFetcher.js";
 
 export type UseAsyncFetcherTestBoxProps = Required<
   UseAsyncFetcherParams<string>
