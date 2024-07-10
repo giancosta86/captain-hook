@@ -1,40 +1,16 @@
 import { describe, it, expect } from "vitest";
 import React from "react";
 import { render } from "@testing-library/react";
-import { delay, measureDuration } from "@giancosta86/time-utils";
+import { measureDuration } from "@giancosta86/time-utils";
 import { createBarrier } from "@giancosta86/sync-tools";
 import { UseAsyncFetcherTestBox } from "./useAsyncFetcher.test.box.js";
-
-namespace Fetchers {
-  export const value = "Dodo";
-}
-
-namespace FastFetcher {
-  export const run = () => Promise.resolve(Fetchers.value);
-}
-
-namespace SlowFetcher {
-  export const fetchDelay = 500;
-
-  export const delayTestInterval = fetchDelay - fetchDelay / 6;
-
-  export const run = async (requestedDelay?: number) => {
-    await delay(requestedDelay ?? fetchDelay);
-    return Fetchers.value;
-  };
-}
-
-namespace ThrowingFetcher {
-  export const errorMessage = "Fetcher error message";
-
-  export const run = () => {
-    throw new Error(errorMessage);
-  };
-}
-
-namespace CancelingErrorFetcher {
-  export const run = async () => undefined;
-}
+import {
+  TestFetchers,
+  FastFetcher,
+  SlowFetcher,
+  CancelingErrorFetcher,
+  ThrowingFetcher
+} from "./_testFetchers/index.js";
 
 describe("useAsyncFetcher()", () => {
   describe("when passing a fetcher that returns immediately", () => {
@@ -54,7 +30,7 @@ describe("useAsyncFetcher()", () => {
         }
       );
 
-      expect(fetchedValue).toBe(Fetchers.value);
+      expect(fetchedValue).toBe(TestFetchers.value);
     });
 
     describe("when the fetcher throws", () => {
@@ -119,7 +95,7 @@ describe("useAsyncFetcher()", () => {
             }
           );
 
-          expect(fetchedValue).toBe(Fetchers.value);
+          expect(fetchedValue).toBe(TestFetchers.value);
         });
 
         expect(elapsedTime).toBeGreaterThan(SlowFetcher.delayTestInterval);
