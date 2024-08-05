@@ -23,31 +23,20 @@
   "exports": {
     "./defineContext": {
       "types": "./dist/defineContext/index.d.ts",
-      "default": "./dist/defineContext/index.js"
+      "import": "./dist/defineContext/index.js"
     },
     "./useAsyncFetcher": {
       "types": "./dist/useAsyncFetcher/index.d.ts",
-      "default": "./dist/useAsyncFetcher/index.js"
+      "import": "./dist/useAsyncFetcher/index.js"
     }
   },
   "repository": "giancosta86/captain-hook",
   "scripts": {
-    "clean": "rimraf dist coverage giancosta86-*.tgz",
-    "clean:all": "pnpm clean && rimraf node_modules",
-    "format": "prettier --write .",
-    "prepack": "pnpm check-all && pnpm build && pnpm prune-dist",
-    "check-all": "pnpm check-format && pnpm lint && pnpm test",
-    "check-format": "prettier --check .",
-    "lint": "eslint . --ext .js,.ts,.jsx,.tsx,.cjs,.mjs",
-    "test": "vitest",
-    "test:watch": "pnpm test -- --watch",
-    "test:coverage": "pnpm test -- --coverage",
-    "build": "pnpm compile-ts",
-    "compile-ts": "tsc",
-    "prune-dist": "rimraf -g 'dist/test/' 'dist/**/*.test.*'",
-    "watch": "pnpm compile-ts --watch"
+    "prepack": "pnpm aurora-prepack"
   },
   "devDependencies": {
+    "@eslint/js": "^9.6.0",
+    "@giancosta86/aurora-react": "link:../aurora-react",
     "@giancosta86/sync-tools": "^1.0.0",
     "@giancosta86/time-utils": "^5.0.0",
     "@testing-library/dom": "^10.3.0",
@@ -56,15 +45,19 @@
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "@typescript-eslint/parser": "^6.3.0",
-    "eslint": "^8.47.0",
-    "eslint-plugin-react": "^7.33.1",
+    "@vitest/coverage-v8": "^2.0.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.3",
     "eslint-plugin-react-hooks": "^4.5.0",
+    "globals": "^15.8.0",
     "jsdom": "^24.1.0",
     "prettier": "^3.0.1",
     "react": "^18",
     "react-dom": "^18.3.1",
-    "rimraf": "^5.0.1",
+    "resolve-tspaths": "^0.8.19",
+    "rimraf": "^6.0.0",
     "typescript": "~5.3.0",
+    "typescript-eslint": "^7.16.0",
     "vitest": "^2.0.0"
   },
   "peerDependencies": {

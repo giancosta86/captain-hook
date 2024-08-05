@@ -1,13 +1,11 @@
 import { defineConfig } from "vitest/config";
+import { default as auroraVitest } from "@giancosta86/aurora/config/vitest";
 
 export default defineConfig({
-  test: {
-    environment: "jsdom",
-    watch: false,
+  ...auroraVitest,
 
-    coverage: {
-      include: ["src/**/*"],
-      exclude: ["**/index.ts?(x)", "**/*.test.ts?(x)", "**/*.test.box.tsx"]
-    }
+  test: {
+    ...auroraVitest.test,
+    environment: "jsdom"
   }
 });

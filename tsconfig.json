@@ -1,39 +1,16 @@
 {
-  "include": ["./src/**/*"],
+  "extends": "./node_modules/@giancosta86/aurora/tsconfig.base.json",
+
+  "include": ["./src/**/*", "./global.d.ts"],
+  "exclude": ["**/*.test.*", "**/_*"],
 
   "compilerOptions": {
-    "target": "ES2021",
-    "module": "CommonJS",
-
-    "moduleResolution": "Node",
-
-    "jsx": "react",
-
     "rootDir": "./src",
     "outDir": "./dist",
 
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "removeComments": true,
-
-    "forceConsistentCasingInFileNames": true,
-
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "exactOptionalPropertyTypes": false,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-
-    "esModuleInterop": true,
-
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["./*"]
+      "~/*": ["./*"]
     }
   }
 }
